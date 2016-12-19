@@ -1,6 +1,0 @@
-TracingMessageMO = PropagationMessageMO (
-	activate: aMethod withArguments: arguments = (
-		Counter addMethodCall.
-		^super activate: aMethod withArguments: arguments
-	)
-)
