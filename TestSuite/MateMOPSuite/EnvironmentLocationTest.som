@@ -1,0 +1,45 @@
+EnvironmentLocationTest = TestCase (
+    
+	testUnfixedLayout = (
+		| shape basicShape person1 person2 person3 |
+		person1 := Person new.
+		person2 := Person new.
+		person3 := Person new.
+		basicShape := person1 shape. 
+		
+		person1 ssn: 3055.
+		
+		shape := basicShape installEnvironment: self class environment.
+		person2 changeShape: shape.
+		person2 ssn: 3055.
+		
+		shape := basicShape installUnfixedEnvironment: self environmentLookupMethod.
+		person3 changeShape: shape.
+		person3 ssn: 3055.
+		
+		self assert: person1 ssn equals: 3055.
+		self assert: person2 ssn equals: nil.
+		self assert: person3 ssn equals: nil.
+    )
+    
+    environmentLookup: receiver = (
+    	^EnvironmentLocationTest environment.
+	)
+	
+	environmentLookupMethod = (	
+		EnvironmentLocationTest methods do: [ :m |
+            m signature = #environmentLookup: ifTrue: [ ^m ]
+        ].
+		^nil.
+	)
+	
+	------------------------
+	
+	environment = (
+    	^EnvironmentMO 
+			operationalSemantics: ImmutableSemanticsMO new 
+			message: nil 
+			layout: nil.
+	)		
+	
+ )

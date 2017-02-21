@@ -35,4 +35,5 @@ Shape = (
     installEnvironment: anEnvironment = primitive
     installClass: aClass 			  = primitive
     fieldsCount						  = primitive
+    defineProperty:final:			  = primitive
  )
