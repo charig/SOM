@@ -1,36 +1,44 @@
 EnvironmentLocationTest = TestCase (
     
 	testUnfixedLayout = (
-		| shape basicShape person1 person2 person3 |
+		| shape basicShape person1 person2 person3 person4 |
 		person1 := Person new.
 		person2 := Person new.
 		person3 := Person new.
+		person4 := Person new.
 		basicShape := person1 shape. 
 		
 		person1 ssn: 3055.
 		
+		" Standard metaobject in layout "
 		shape := basicShape installEnvironment: self class environment.
 		person2 changeShape: shape.
 		person2 ssn: 3055.
 		
-		shape := basicShape installUnfixedEnvironment: self environmentLookupMethod.
+		" A method in the layout defining that the metaobject is a global environment "
+		shape := basicShape installUnfixedEnvironment: EnvironmentLocationTest>>#environmentLookup:.
+		"self environmentLookupMethod."
 		person3 changeShape: shape.
 		person3 ssn: 3055.
+		
+		" method in the layout defining in which instance locations is actually the metaobject "
+		shape := basicShape define: #environment final: true hidden: true.
+		shape := basicShape installUnfixedEnvironment: EnvironmentLocationTest>>#environmentLookupInInstance:.
+		person4 changeShape: shape.
+		person4 ssn: 3055.
 		
 		self assert: person1 ssn equals: 3055.
 		self assert: person2 ssn equals: nil.
 		self assert: person3 ssn equals: nil.
+		self assert: person4 ssn equals: nil.
     )
     
     environmentLookup: receiver = (
     	^EnvironmentLocationTest environment.
 	)
 	
-	environmentLookupMethod = (	
-		EnvironmentLocationTest methods do: [ :m |
-            m signature = #environmentLookup: ifTrue: [ ^m ]
-        ].
-		^nil.
+	environmentLookupInInstance: receiver = (
+    	^self instVarAt: 25
 	)
 	
 	------------------------
