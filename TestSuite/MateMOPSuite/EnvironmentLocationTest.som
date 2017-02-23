@@ -1,7 +1,7 @@
 EnvironmentLocationTest = TestCase (
     
 	testUnfixedLayout = (
-		| shape basicShape person1 person2 person3 person4 |
+		| shape basicShape person1 person2 person3 person4 values |
 		person1 := Person new.
 		person2 := Person new.
 		person3 := Person new.
@@ -16,15 +16,17 @@ EnvironmentLocationTest = TestCase (
 		person2 ssn: 3055.
 		
 		" A method in the layout defining that the metaobject is a global environment "
-		shape := basicShape installUnfixedEnvironment: EnvironmentLocationTest>>#environmentLookup:.
-		"self environmentLookupMethod."
+		shape := basicShape installUnfixedEnvironment: EnvironmentLocationTest>>#environmentLookup.
 		person3 changeShape: shape.
 		person3 ssn: 3055.
 		
 		" method in the layout defining in which instance locations is actually the metaobject "
-		shape := basicShape define: #environment final: true hidden: true.
-		shape := basicShape installUnfixedEnvironment: EnvironmentLocationTest>>#environmentLookupInInstance:.
+		"define returns a two-valued array. 1st pos, the new key, 2nd the new shape."
+		values := basicShape define: #environment final: true hidden: true.
+		self class key: (values at: 1).
+		shape := (values at: 2) installUnfixedEnvironment: EnvironmentLocationTest>>#environmentLookupInInstance.
 		person4 changeShape: shape.
+		person4 setHiddenField: (values at: 1) value: self class environment.
 		person4 ssn: 3055.
 		
 		self assert: person1 ssn equals: 3055.
@@ -33,21 +35,24 @@ EnvironmentLocationTest = TestCase (
 		self assert: person4 ssn equals: nil.
     )
     
-    environmentLookup: receiver = (
+    environmentLookup = (
     	^EnvironmentLocationTest environment.
 	)
 	
-	environmentLookupInInstance: receiver = (
-    	^self instVarAt: 25
+	environmentLookupInInstance = (
+		^self getField: EnvironmentLocationTest key
 	)
 	
 	------------------------
+	| key |
 	
 	environment = (
     	^EnvironmentMO 
 			operationalSemantics: ImmutableSemanticsMO new 
 			message: nil 
 			layout: nil.
-	)		
+	)
 	
- )
+	key = (^key)
+	key: aKey = (key := aKey)
+)

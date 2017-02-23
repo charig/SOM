@@ -141,6 +141,8 @@ Object = nil (
 	readOnly = ( ^Handle targetSPECIAL: self )
 	changeShape: aShape = primitive
 	shape = primitive
+	setHiddenField: aString value: anEnvironment = primitive "Returns an array #(key, shape)"
+	getField: aKey = primitive
 	
 	"Debugging Stuff"
 	printLastMethods: aNumber = (
