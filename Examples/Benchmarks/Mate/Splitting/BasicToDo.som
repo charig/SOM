@@ -11,24 +11,27 @@ BasicToDo = Benchmark (
     )
     
     benchmark = (
-    	| accumulator |
+    	| accumulator p |
     	accumulator := 0.
-    	points collect: [:point | point x + point hash].
-    	points collect: [:point | point y + (point isNil ifTrue: [0] ifFalse: [1])].
-    	points collect: [:point | point x + point value y].
-    	points collect: [:point | accumulator := accumulator + point y].
     	points collect: [:point | accumulator := accumulator + point x].
-    	points collect: [:point | point x].
-    	points collect: [:point | point y].
+    	"To ensure the compiler do not optimize both blocks into one"
+    	p := Point new.
+    	points append: p.
+    	points collect: [:point | accumulator := accumulator + point y].
+    	points remove: p.
+    	p := Point new.
+    	points append: p.
+    	points collect: [:point | accumulator := accumulator + point x].
+    	points remove: p.
     	^accumulator
     )
     
     iterationOne = ()
     
     verifyResult: result = (
-    	^self assert: result equals: (self problemSize * 2)
+    	^self assert: result equals: (self problemSize * 3) + 2
     )
     
-    problemSize = (^100)
+    problemSize = (^2)
     problemSize: aNumber = (problemSize := aNumber)
 )    
