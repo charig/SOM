@@ -32,6 +32,6 @@ BasicToDo = Benchmark (
     	^self assert: result equals: (self problemSize * 3) + 2
     )
     
-    problemSize = (^2)
+    problemSize = (^5)
     problemSize: aNumber = (problemSize := aNumber)
 )    
