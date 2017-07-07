@@ -27,7 +27,23 @@ Block = (
     "For the creation of Block instances, see Universe_new_block()."
     
     "Evaluation"
-    value = primitive
+    value = (
+    	^self valueWithArguments: (Array new: 1)
+    )
+    
+    value: arg = (
+    	^self valueWithArguments: (Array with: arg)
+    )
+    
+    value: arg1 with: arg2 = (
+    	^self valueWithArguments: (Array with: arg1 with: arg2)
+    )
+    
+    value: arg1 with: arg2 with: arg3 = (
+    	^self valueWithArguments: (Array with: arg1 with: arg2 with: arg3)
+    )
+    
+    valueWithArguments: args = primitive
     
     "Looping" 
     whileFalse: block = ( 
@@ -50,6 +66,14 @@ Block = (
 			ifTrue: [self value]
 			ifFalse: [self value: anArg]
 	)
+	
+	ensure: aBlock = (
+    	"Implemented for FileSystem support. It still does not comply with ensure behavior when the block fails"
+    	| returnValue |
+    	returnValue := self value. 
+    	aBlock value.
+    	^returnValue
+    )
     
     " Petit Parser" 
     asParser = (^ PPPluggableParser on: self)
