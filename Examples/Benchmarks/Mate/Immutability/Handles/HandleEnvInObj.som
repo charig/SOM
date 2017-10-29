@@ -1,0 +1,21 @@
+HandleEnvInObj = Handle (
+    
+    ----------------------------
+    
+    initialize = (
+		self semantics: 
+					(EnvironmentMO 
+							operationalSemantics: ImmutableSemanticsForHandlesEnvInObjMO new 
+							message: ImmutableMessageForHandlesMO new
+							layout: nil
+					).
+	)
+    
+    targetSPECIAL: anObject = (
+    	| object |
+    	object := self basicNew: self semantics.
+    	object targetSPECIAL: anObject.
+    	"object installEnvironment: ." 
+    	^object
+    )
+ )

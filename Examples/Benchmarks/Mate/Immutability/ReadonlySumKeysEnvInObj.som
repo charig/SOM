@@ -1,0 +1,10 @@
+ReadonlySumKeysEnvInObj = DelegationProxiesSumKeys (
+   	oneTimeSetup = (
+    	HandleEnvInObj initialize.
+    	super oneTimeSetup.
+    )
+   	
+   	makeHeadOfListReadOnly = (
+    	pairs := pairs readOnlyEnvInObj.
+    )
+)
