@@ -11,6 +11,6 @@ LocalVariableWrite = Benchmark (
     )
     
     verifyResult: result = (
-      ^object key = result
+      ^result <= 100
     )
 )    
