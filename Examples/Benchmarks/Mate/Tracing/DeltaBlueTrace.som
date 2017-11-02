@@ -24,7 +24,7 @@ DeltaBlueTrace = DeltaBlue (
 
         self installEnvironment: nil.
 
-        Counter methodCalls println.
+        "Counter methodCalls println."
         "Counter methods do: [:name | name println.]."
 
         "self verifyResult ifFalse: [ ^ false ]."
