@@ -6,7 +6,25 @@ BasicOperationsTest = TestCase (
     | testField |
 
     setUp = (self class initialize)
+	
+	testFieldRead = (
+        testField := 1.
+        self assert: 1 equals: testField.
+        self installFieldsMetaobject.
+        self assert: 2 equals: testField.
+        self uninstallMetaobject.
+        self assert: 1 equals: testField.
+    )
 
+    testFieldWrite = (
+        testField := 1.
+        self assert: 1 equals: testField.
+        self installFieldsMetaobject.
+        testField := 1.
+        self uninstallMetaobject.
+        self assert: 2 equals: testField.
+    )
+	
     testLocalVarRead = (
         | localVar |
         localVar := 1.
@@ -39,24 +57,6 @@ BasicOperationsTest = TestCase (
         self assert: 2 equals: argValue.
         argValue := self argsTest: 1.
         self assert: 1 equals: argValue.
-    )
-
-    testFieldRead = (
-        testField := 1.
-        self assert: 1 equals: testField.
-        self installFieldsMetaobject.
-        self assert: 2 equals: testField.
-        self uninstallMetaobject.
-        self assert: 1 equals: testField.
-    )
-
-    testFieldWrite = (
-        testField := 1.
-        self assert: 1 equals: testField.
-        self installFieldsMetaobject.
-        testField := 1.
-        self uninstallMetaobject.
-        self assert: 2 equals: testField.
     )
 
     testReturn = (
@@ -108,7 +108,7 @@ BasicOperationsTest = TestCase (
         ] whileTrue: [ self returnTest. i := i + 1 ].
 
         self uninstallMetaobject.
-        self assert: 3 equals: testField.
+        self assert: 4 equals: testField.
     )
 
     testMethodActivacion = (
@@ -126,7 +126,7 @@ BasicOperationsTest = TestCase (
         self hashcode.
 
         self uninstallMetaobject.
-        self assert: 12 equals: testField.
+        self assert: 14 equals: testField.
     )
 
     testLayoutRead = (
