@@ -5,7 +5,7 @@ Counter = Object (
 	| methodCalls methods |
 	
 	initialize = (
-		methods := Array new: 10000.
+		"methods := Array new: 10000."
 		methodCalls := 0.
 	)
 	

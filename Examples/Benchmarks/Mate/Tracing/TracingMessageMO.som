@@ -1,6 +1,9 @@
 TracingMessageMO = PropagationMessageMO (
 	activate: aMethod withArguments: arguments = (
+		| realArguments | 
 		Counter addMethodCall.
-		^super activate: aMethod withArguments: arguments
+		arguments at: 1 put: PropagationMessageMO instrumentationMO.
+		"realArguments at: 2 put: system baseExecutionLevel."
+		^arguments.
 	)
 )
