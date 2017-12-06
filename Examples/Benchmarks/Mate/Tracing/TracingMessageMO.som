@@ -3,7 +3,7 @@ TracingMessageMO = PropagationMessageMO (
 		| realArguments | 
 		Counter addMethodCall.
 		arguments at: 1 put: PropagationMessageMO instrumentationMO.
-		"realArguments at: 2 put: system baseExecutionLevel."
+		"arguments at: 2 put: system baseExecutionLevel."
 		^arguments.
 	)
 )
