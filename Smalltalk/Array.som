@@ -24,8 +24,7 @@ THE SOFTWARE.
 "
 
 Array = (
-	size = (self printLastMethods:5)
-    "Accessing"
+	"Accessing"
     at: index            = primitive
     at: index put: value = primitive
     length               = primitive

@@ -32,7 +32,7 @@ Instance Variables:
 	keywords = (^ selector keywords)
 	numArgs = (^self selector numArgs)
 	selectorParts = (^ self keywords collect: #asSymbol.)
-	arguments = (^arguments ifNil: [#()] ifNotNil: [arguments])
+	arguments = (^arguments ifNil: [#()] ifNotNil: [:arguments | arguments])
 	isFirstCascaded = (^self isCascaded and: [parent messages first == self])
 	
 	isInlineWhile = (
