@@ -15,8 +15,6 @@ FilePluginPrims = Object (
 	
 	close: id = (
 		"Close this file."
-	
-		
 	)
 	
 	deleteFile: aFileName = (

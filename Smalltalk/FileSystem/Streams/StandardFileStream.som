@@ -328,7 +328,7 @@ StandardFileStream = FileStream (
 			collection ifNotNil: [ :collection |
 				readLimit := position := 0 ].
 			self primClose: fileID.
-			self unregister.
+			"self unregister."
 			fileID := nil].
 	
 	)

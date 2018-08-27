@@ -6,7 +6,6 @@ FilesTest = TestCase (
   testOpen = (
     | file |
     file := FileSystem * 'core-lib/Smalltalk/Array.som'.
-    file contents asString println.
-    self assert: true
+    self assert: file contents asString length == 9384.
   )
 )
