@@ -143,6 +143,7 @@ Object = nil (
     "Delegation Proxies"
     instVarNamed: sym myself: anObject = (^self instVarNamed: sym)
     instVarAt: anIndex myself: anObject = (^self instVarAt: anIndex)
+    target = (^self)
     
     "Extension for the MOP"
 	readOnly 		 = ( ^Handle targetSPECIAL: self )
@@ -165,4 +166,7 @@ Object = nil (
 	isPetitParser = (^false)
 	asParser = (^PPPredicateObjectParser expect: self)
 	isString = (^false)
+	
+	-----------------------------
+	handler: aHandler target: aTarget = ("Do not proxy primitive values." ^aTarget)
 )

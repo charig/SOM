@@ -17,10 +17,4 @@ DelegationProxiesSumKeys = SumKeys (
       ].
       ^true
     )
-    
-    oneTimeSetup = (
-    	super oneTimeSetup.
-    	PropagationHandler initialize.
-    	ReadOnlyPropagationHandler initialize.
-    )
 )

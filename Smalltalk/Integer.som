@@ -133,7 +133,7 @@ Integer = (
     )
     
     "Delegation Proxies"
-    proxyClass = (^IntegerProxy)
+    proxyClass = (^Object)
     
 	"Readonly"
 	readOnly = (^self)

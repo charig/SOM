@@ -5,8 +5,6 @@ Proxy = Object (
     	^self equal: aValue myself: self.
     )
     
-    instVarNamed: sym myself: anObject = (^self instVarNamed: sym)
-	
 	handler = (
 		^handler 
 	) 

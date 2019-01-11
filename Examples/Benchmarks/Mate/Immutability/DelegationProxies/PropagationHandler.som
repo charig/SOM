@@ -1,21 +1,17 @@
 PropagationHandler = Object (
-	| isRoot |
-	
-	initialize = (
-		isRoot := true.
-	)
-	
 	handleMessage: aSelector withArguments: arguments myself: aProxy target: aReceiver = (
+		| dpSelector args |
+		dpSelector := (arguments length > 0) 
+			ifTrue: [(aSelector, 'myself:') asSymbol ] 
+			ifFalse: [ (aSelector, 'Myself:') asSymbol].
 		^aSelector isPrimitive
-			ifTrue: [ self wrap: (aReceiver perform: aMsg myself: aProxy) ]
-			ifFalse: [
-				"self isRoot
-					ifTrue: [
-						aMsg arguments: (self wrapAll: aMsg arguments).
-						self unwrap: (aReceiver perform: aMsg myself: aProxy) ]
-					ifFalse: [ "
-				aReceiver perform: aSelector withArguments: arguments ] 
-			"]" 
+			ifTrue: [ self wrap: (aReceiver perform: dpSelector withArguments: arguments, aProxy) ]
+			ifFalse: [ 
+				args := arguments length > 1 
+					ifTrue: [(self wrapAll: (arguments copyFrom: 2)), aProxy] 
+					ifFalse: [Array with: aProxy].
+				self unwrap: (aReceiver perform: dpSelector withArguments: args).
+			]
 	)
 	
 	handleReadField: aField myself: aProxy target: aReceiver = (
@@ -32,33 +28,16 @@ PropagationHandler = Object (
 	)
 	
 	wrap: anObject = (
-		^anObject proxyClass handler: self class notRoot target: anObject
+		^anObject proxyClass handler: self class new target: anObject
 	)
 	
 	wrapAll: aCollection = (
- 		aCollection collect: [ :each | self wrap: each ]
+ 		^aCollection collect: [ :each | self wrap: each ]
  	)
  	
  	unwrap: aProxy = (
 		"Reflect targetOf: aProxy"
 		^aProxy target.
  	)
- 	
- 	isRoot: aBoolean = (
-		isRoot := aBoolean
-	)
-	
-	isRoot = (
-		^isRoot
-	)
-	
-	---------------
-	| notRoot |
-	
-	initialize = (
-		notRoot := self new.
-		notRoot isRoot: false.
-	)
-	
-	notRoot = (^notRoot)
+
 )

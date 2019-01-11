@@ -33,13 +33,13 @@ ListElementProxy = Proxy (
     )
     
     next = (^self nextMyself: self)
-    next: aValue = (^self next: aValue myself: self)
-    nextMyself: slf = ( ^handler handleReadField: #next myself: slf target: target)
-    next: anElement myself: slf = ( ^handler handleWriteField: #next value: anElement myself: slf target: target )
-    
+    nextMyself: slf = (^handler handleReadField: #next myself: slf target: target)
     val = (^self valMyself: self)
-    val: aValue = (^self val: aValue myself: self)
     valMyself: slf    = ( ^handler handleReadField: #val myself: slf target: target )
+    
+    next: aValue = (^self next: aValue myself: self)
+    next: anElement myself: slf = ( ^handler handleWriteField: #next value: anElement myself: slf target: target )
+    val: aValue = (^self val: aValue myself: self)
     val: n myself: slf = ( ^handler handleWriteField: #val value: n myself: slf target: target )
 )
 
