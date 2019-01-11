@@ -1,3 +1,18 @@
 ReadOnlyPropagationHandler = PropagationHandler (
+	handleMessage: aSelector withArguments: arguments myself: aProxy target: aReceiver = (
+		| dpSelector args |
+		dpSelector := (arguments length > 0) 
+			ifTrue: [(aSelector, 'myself:') asSymbol ] 
+			ifFalse: [ (aSelector, 'Myself:') asSymbol].
+		^aSelector isPrimitive
+			ifTrue: [ self wrap: (aReceiver perform: dpSelector withArguments: arguments, aProxy) ]
+			ifFalse: [ 
+				args := arguments length > 0 
+					ifTrue: ["We do not have to wrap arguments in readonly behavior" arguments, (Array with: aProxy)] 
+					ifFalse: [Array with: aProxy].
+				self unwrap: (aReceiver perform: dpSelector withArguments: args).
+			]
+	)
+	
 	handleWriteField: field value: value myself: aProxy target: aReceiver = ()
 )

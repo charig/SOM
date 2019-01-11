@@ -27,12 +27,17 @@ Pair = (
     | key value |
     
     "Accessing"
-    key = ( ^key )
-    value = ( ^value )
+    key = ( ^self keyMyself: self )
+    keyMyself: slf = ( ^key )
+    
+    value = ( ^self valueMyself: self )
+    valueMyself: slf = ( ^value )
     
     "Private"
-    key: aKey = ( key := aKey )
-    value: aValue = ( value := aValue )
+    key: aKey = ( self key: aKey myself: self )
+    key: aKey myself: slf = ( ^key := aKey )
+    value: aValue = ( self value: aValue myself: self )
+    value: aValue myself: slf = (value := aValue)
     
     "Comparing"
     = aPair = (
@@ -40,7 +45,7 @@ Pair = (
     )
     
     equal: aPair myself: slf = (
-    	^(slf key = aPair key) and: [slf value = aPair value]
+    	^((self keyMyself: self) = aPair key) and: [(self valueMyself: self) = aPair value]
     )
         
     "Printing"
@@ -48,7 +53,10 @@ Pair = (
     println = ( self print. '' println )
     
     "Only need for Mate immutability testing"
-    changeKeyOf: aPair to: aValue = (aPair key: 1)
+    changeKeyOf: aPair to: aValue = (self changeKeyOf: aPair to: aValue myself: self)
+    changeKeyOf: aPair to: aValue myself: slf = (aPair key: 1)
+    
+    proxyClass = (^PairProxy)
     ----
     
     withKey: aKey andValue: aValue = (

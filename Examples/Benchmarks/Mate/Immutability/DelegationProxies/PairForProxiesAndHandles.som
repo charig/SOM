@@ -11,7 +11,7 @@ PairForProxiesAndHandles = Pair (
     )
     
     key: aValue innerPropagation: anIndex all: aSetOfPairs myself: slf = (
-        slf writeKey: (slf keyMyself: slf) + aValue myself: slf.
+        slf key: (slf keyMyself: slf) + aValue myself: slf.
         (anIndex > 0 and: [aValue < aSetOfPairs length]) ifTrue: [
 			(slf class handler: slf handler target: (aSetOfPairs at: aValue + 1))
             	key: aValue + 1 
@@ -29,11 +29,11 @@ PairForProxiesAndHandles = Pair (
     )
     
     key: aKey myself: slf = (
-    	slf writeFieldKeyValue: aKey myself: aProxy
+    	slf writeFieldKeyValue: aKey myself: slf
     )
     
-    value: aValue myself: aProxy = (
-    	slf writeFieldValueValue: aValue myself: aProxy
+    value: aValue myself: slf = (
+    	slf writeFieldValueValue: aValue myself: slf
     )
 	
 	readFieldKeyMyself: slf = ( ^key )

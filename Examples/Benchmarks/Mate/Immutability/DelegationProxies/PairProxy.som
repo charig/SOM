@@ -29,7 +29,7 @@ PairProxy = Proxy (
     value = ( ^self valueMyself: self )
     
     equal: aValue myself: slf = (
-    	^handler handleMessage: #equal:myself: withArguments: (Array with: aValue with: slf) myself: slf target: target
+    	^handler handleMessage: #equal: withArguments: (Array with: aValue) myself: slf target: target
     )
     
     keyMyself: slf = ( ^handler handleReadField: #key myself: slf target: target )
@@ -41,11 +41,11 @@ PairProxy = Proxy (
     		(Array with: aPair with: aValue) myself: slf target: target
     )
     
-    key: aKey = ( ^self writeKey: aKey myself: self )
-    value: aValue = ( ^self writeValue: aValue myself: self)
+    key: aKey = ( ^self key: aKey myself: self )
+    value: aValue = ( ^self value: aValue myself: self)
     
-    writeKey: aKey myself: slf = ( ^handler handleWriteField: #key value: aKey myself: slf target: target )
-    writeValue: aValue myself: slf = ( ^handler handleWriteField: #value value: aValue myself: slf target: target )
+    key: aKey myself: slf = (^handler handleWriteField: #key value: aKey myself: slf target: target )
+    value: aValue myself: slf = ( ^handler handleWriteField: #value value: aValue myself: slf target: target )
         
     "Printing"
     print = ( '[' print. self key print. '=>' print. self value print. ']' print )
@@ -57,7 +57,7 @@ PairProxy = Proxy (
     )
     
     key: aValue innerPropagation: anIndex all: aSetOfPairs myself: slf = (
-    	^handler handleMessage: #key:innerPropagation:all:myself: withArguments: 
-    		(Array with: aValue with: anIndex with: aSetOfPairs with: slf) myself: slf target: target
+    	^handler handleMessage: #key:innerPropagation:all withArguments: 
+    		(Array with: aValue with: anIndex with: aSetOfPairs) myself: slf target: target
     )
 )
