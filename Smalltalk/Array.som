@@ -28,6 +28,7 @@ Array = (
     at: index            = primitive
     at: index put: value = primitive
     length               = primitive
+    asString             = primitive
     isEmpty				 = (^self length = 0)
     notEmpty 		     = (^ self isEmpty not)
     putAll: block        = ( self doIndexes: [ :i |
@@ -216,11 +217,6 @@ Array = (
 		^notEmptyBlock cull: self
 	)
         
-    "Files / Pharo Compatibility"
-    asString = (
-    	^self inject: '' into: [:res :elm | res + elm asString].
-    )
-    
     indexOfAnyOf: aCollection = (^self indexOfAnyOf: aCollection startingAt: 1)
 	indexOfAnyOf: aCollection startingAt: start = (
 		start to: self length do: [:index |

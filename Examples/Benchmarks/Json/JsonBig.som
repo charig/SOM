@@ -6,10 +6,8 @@ JsonBig = Json (
 	contents = (
 		| content file stream |
 		file := (FileSystem * (self filename)).
-
 		stream := file readStream.
-		content :=  stream contents.
-
+		content :=  stream contentsOfEntireFile.
 		(system inTruffle)
             ifTrue: [ ^content asString ]
             ifFalse: [ ^'' join: content ].
@@ -22,6 +20,6 @@ JsonBig = Json (
     )
     
     filename = (
-    	^'Mate/Tracing/AllSets-xCleaned.json'
+    	^'Examples/Benchmarks/Mate/Tracing/AllSets.json'
     )
 )

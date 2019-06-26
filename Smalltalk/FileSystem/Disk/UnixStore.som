@@ -31,7 +31,7 @@ UnixStore = DiskStore (
 	)
 	
 	delimiter = (
-		^ '/'
+		^ $/
 	)
 	
 	isCaseSensitive = (
