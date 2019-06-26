@@ -367,7 +367,7 @@ Path = Vector (
 			ifTrue: [ AbsolutePath ]
 			ifFalse:[ RelativePath ].
 			
-		^ pathClass withAll: (pathClass canonicalizeElements: (aDelimiterCharacter split: aString))
+		^ pathClass withAll: (pathClass canonicalizeElements: (aDelimiterCharacter asString split: aString))
 	)
 	
 	parents: anInteger = (

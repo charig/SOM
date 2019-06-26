@@ -47,8 +47,6 @@ FileHandle = FileSystemHandle (
 	)
 	
 	readStream = (
-		| a |
-		a := FileStream onHandle: self.
 		^ (FileStream onHandle: self)
 			ifNil: [ self streamError ]
 		
