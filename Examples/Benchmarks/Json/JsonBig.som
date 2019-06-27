@@ -20,6 +20,9 @@ JsonBig = Json (
     )
     
     filename = (
-    	^'Examples/Benchmarks/Mate/Tracing/AllSets.json'
+    	^system inTruffle
+    		ifTrue:['Mate/Tracing/AllCards.json']
+    		ifFalse:['Examples/Benchmarks/Mate/Tracing/AllCards.json']
+    	
     )
 )
