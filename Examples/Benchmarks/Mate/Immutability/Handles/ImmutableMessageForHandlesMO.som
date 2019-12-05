@@ -3,10 +3,15 @@ ImmutableMessageForHandlesMO = MessageLookupMO (
 		| lookupStart |
 		lookupStart := (ImmutableMessageForHandlesMO reimplementedPrimitives contains: aSymbol) 
 			ifTrue: [self class]
-			ifFalse: [self targetSPECIAL class]
+			ifFalse: [self targetSPECIAL class].
 		^super find: aSymbol since: lookupStart
 	)
 	
 	----------------------------
-	reimplementedPrimitives = (^#(#equalsSPECIAL:))
+	| ReimplementedPrimitives |
+	
+	initialize = (
+		ReimplementedPrimitives := #(#= #== #equalsequalsSPECIAL: #equalsSPECIAL:)
+	)
+	reimplementedPrimitives = (^ReimplementedPrimitives)
 )

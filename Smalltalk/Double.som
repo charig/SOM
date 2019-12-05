@@ -53,7 +53,11 @@ Double = (
     
     "Converting"
     asString = primitive
-    asFloat  = (^self) 
+    asFloat  = (^self)
+    
+    "Readonly"
+	readOnly = (^self)
+	readOnlyEnvInObj = (^self) 
 
     "Iterating"
     to: limit do: block = (

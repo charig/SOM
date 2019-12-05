@@ -261,7 +261,10 @@ Array = (
 		^ result
 	)
 	
-	
+	"Extension for the MOP"
+	readOnly 		 = ( ^HandleForArray targetSPECIAL: self )
+	atHandlesSPECIAL: index = ( ^(self targetSPECIAL at: index) readOnly )
+    
     ----------------------------
     
     "Allocation"

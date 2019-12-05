@@ -1,8 +1,5 @@
 "
-
-$Id: Boolean.som 27 2009-07-31 11:17:53Z michael.haupt $
-
-Copyright (c) 2001-2013 see AUTHORS file
+Copyright (c) 2016 see AUTHORS.md file
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the 'Software'), to deal
@@ -23,22 +20,14 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 "
 
-Boolean = (
-
-    "Conditional evaluation"
-    ifTrue: trueBlock ifFalse: falseBlock = (
-        self ifTrue:  [ ^trueBlock value  ].
-        self ifFalse: [ ^falseBlock value ].
-    )
-    
-    "Logical operations"
-    || boolean = ( ^self or: boolean  )
-    && boolean = ( ^self and: boolean )
-    
-    "Readonly"
-	readOnly = (^self)
-	readOnlyEnvInObj = (^self) 
-    
-    
+Sym = (
+  | hash |
+  init: aHash = ( hash := aHash )
+  
+  customHash = ( ^ hash )
+  ----
+  
+  new: aHash = (
+    ^ (self new init: aHash) readOnly
+  )
 )
-

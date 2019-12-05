@@ -1,0 +1,16 @@
+HandleForArray = Handle (
+	
+    ----------------------------
+    
+    initialize = (
+		| shape |
+		shape := self getShapeForInstances.
+		self semantics: 
+					(EnvironmentMO 
+							operationalSemantics: ImmutableSemanticsForHandlesMO new 
+							message: ImmutableMessageForHandlesPrimitiveMO new
+							layout: nil
+					).
+		self updateShapeForInstancesWith: (shape installEnvironment: self semantics).
+	)
+ )

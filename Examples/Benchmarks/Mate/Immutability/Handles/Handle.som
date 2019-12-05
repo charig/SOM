@@ -5,6 +5,14 @@ Handle = (
     targetSPECIAL = ( ^target )
     = other 				= (^self equalsSPECIAL: other)
     equalsSPECIAL: other 	= (^target = other)
+    == other 				= (^self equalsequalsSPECIAL: other)
+    equalsequalsSPECIAL: other = (
+    	| compareTo | 
+    	compareTo := (other class = self class) 
+    		ifTrue: [other targetSPECIAL]
+    		ifFalse: [other]. 
+    	^target == compareTo
+    )
     
     ----------------------------
     
@@ -16,6 +24,9 @@ Handle = (
     
     initialize = (
 		| shape |
+		HandleForArray initialize.
+		ImmutableMessageForHandlesMO initialize.
+		ImmutableMessageForHandlesPrimitiveMO initialize.
 		shape := self getShapeForInstances.
 		self semantics: 
 					(EnvironmentMO 
@@ -28,6 +39,7 @@ Handle = (
     
     targetSPECIAL: anObject = (
     	| object |
+    	(anObject class = self) ifTrue: [^anObject].
     	object := self basicNew.
     	object targetSPECIAL: anObject. 
     	^object
