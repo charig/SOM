@@ -1,0 +1,8 @@
+ImmutableMessageForPrimitivesMO = ImmutableMessageForHandlesMO (
+    ----------------------------
+	| WritablePrimitives ReturningPrimitives Primitives |
+	
+	writablePrimitives = (^WritablePrimitives)
+	returningPrimitives = (^ReturningPrimitives)
+	primitives = (^Primitives) 
+)

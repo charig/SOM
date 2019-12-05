@@ -111,4 +111,7 @@ Class = (
 		method := (self methods select: [:mthd | mthd signature = aSelector]) first.
 		^method compilation. 
 	)
+	
+	"Extension for the MOP"
+	readOnly 		 = ( ^HandleForClass targetSPECIAL: self )
 )

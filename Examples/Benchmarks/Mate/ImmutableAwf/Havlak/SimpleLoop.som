@@ -68,6 +68,6 @@ SimpleLoop = (
   ----
   
   basicBlock: bb reducible: isReducible = (
-    ^ (self new init: bb reducible: isReducible) readOnly
+    ^ self new init: bb reducible: isReducible
   )
 )

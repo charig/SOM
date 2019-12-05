@@ -1,15 +1,10 @@
 Richards = Benchmark (
+    oneTimeSetup = (Handle initialize)
+    
     benchmark = (
         ^ RichardsBenchmarks new reBenchStart.
     )
     verifyResult: result = (
       ^ result
-    )
-    
-    ----
-    
-    new = (
-        Handle initialize.
-        ^ super new readOnly
     )
 )

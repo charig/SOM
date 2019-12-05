@@ -1,0 +1,26 @@
+ImmutableMessageForArrayHandlesMO = ImmutableMessageForPrimitivesMO (
+	find: aSymbol since: aClass = (	
+		(ImmutableMessageForArrayHandlesMO writablePrimitives contains: aSymbol) 
+			ifTrue: ['ERROR: Unexpected write to a readonly object!' println. self halt. ^nil]
+		^(ImmutableMessageForArrayHandlesMO returningPrimitives containsKey: aSymbol) 
+			ifTrue: [super find: (ImmutableMessageForArrayHandlesMO returningPrimitives at: aSymbol) since: aClass]	
+			ifFalse: [super find: aSymbol since: aClass]
+	)
+	
+	activate: aSignature withArguments: arguments = (
+		(ImmutableMessageForArrayHandlesMO primitives contains: aSignature) ifTrue:[
+			arguments at:3 put: (arguments at: 3) targetSPECIAL.
+		]
+		^arguments
+	)
+	----------------------------
+	initialize = (
+		Primitives := #(#length).
+		WritablePrimitives := #(#at:put:).
+		
+		"We must wrap returning primitives so that the returned value is wrapped with a readonly reference"
+		ReturningPrimitives := Dictionary new.
+		ReturningPrimitives at: #at: put: #atHandlesSPECIAL:
+	)
+ 
+)
