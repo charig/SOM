@@ -1,0 +1,47 @@
+Handle = (
+	| target |
+    "Accessing"
+    targetSPECIAL: anObject = ( target := anObject )
+    targetSPECIAL = ( ^target )
+    = other 				= (^self equalsSPECIAL: other)
+    equalsSPECIAL: other 	= (^target = other)
+    == other 				= (^self equalsequalsSPECIAL: other)
+    equalsequalsSPECIAL: other = (
+    	| compareTo |
+    	compareTo := (other class = self class)
+    		ifTrue: [other targetSPECIAL]
+    		ifFalse: [other].
+    	^target == compareTo
+    )
+
+    ----------------------------
+
+    | semantics |
+
+    "Accessing"
+    semantics = ( ^semantics )
+    semantics: anObject	= ( semantics := anObject )
+
+    initialize = (
+        HandleForArray initialize.
+        HandleForClass initialize.
+        ImmutableMessageForHandlesMO initialize.
+        ImmutableMessageForArrayHandlesMO initialize.
+        ImmutableMessageForClassHandlesMO initialize.
+
+        self semantics:
+                    (EnvironmentMO
+                            operationalSemantics: ImmutableSemanticsForHandlesMO new
+                            message: ImmutableMessageForHandlesMO new
+                            layout: nil
+                    ).
+    )
+
+    targetSPECIAL: anObject = (
+        | object |
+        (anObject class = self) ifTrue: [^anObject].
+        object := self basicNew: self semantics.
+        object targetSPECIAL: anObject.
+        ^object
+    )
+ )

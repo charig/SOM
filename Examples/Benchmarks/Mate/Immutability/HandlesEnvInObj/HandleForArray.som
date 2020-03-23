@@ -1,0 +1,6 @@
+HandleForArray = HandleSupportingPrimitives (
+
+    ----------------------------
+
+    messageMO = ( ^ImmutableMessageForArrayHandlesMO new)
+ )
