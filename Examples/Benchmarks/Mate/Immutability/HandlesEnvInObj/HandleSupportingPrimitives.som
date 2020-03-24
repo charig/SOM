@@ -1,0 +1,14 @@
+HandleSupportingPrimitives = Handle (
+	
+    --------------
+    
+    initialize = (
+		| shape |
+		self semantics: 
+					(EnvironmentMO 
+							operationalSemantics: ImmutableSemanticsForHandlesMO new 
+							message: self messageMO
+							layout: nil
+					).
+	)
+ )

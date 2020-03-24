@@ -84,7 +84,7 @@ Object = nil (
     "Debugging"
     inspect   = primitive
     halt      = primitive
-    hasMetaObjectEnvironment = primitive
+    hasEnvironment = primitive
     inMeta = primitive
     
     "Error handling"

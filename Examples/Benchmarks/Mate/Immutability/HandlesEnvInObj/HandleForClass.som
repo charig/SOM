@@ -1,0 +1,6 @@
+HandleForClass = HandleSupportingPrimitives (
+	
+    ----------------------------
+    
+    messageMO = ( ^ImmutableMessageForClassHandlesMO new)
+ )
